@@ -16,7 +16,7 @@ const Login = () => {
 
         <div className="flex items-center justify-center h-screen shadow-lg">
             <div className="mx-auto max-w-md w-full py-6 px-8 bg-zinc-100 hover:bg-zinc-200 rounded shadow-xl">
-                <h3 className='text-3xl font-black text-gray-300 text-center mb-6'>Login</h3>
+                <h3 className='text-3xl font-black text-gray-600 text-center mb-6'>Login</h3>
                 <form onClick={handleLogin} method="post">
                     <div className='mb-6'>
                         <label htmlFor="email" className="block text-gray-800 font-bold">Email:</label>

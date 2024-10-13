@@ -1,18 +1,26 @@
+import mongoose from "mongoose";
 
-import moongose from moongose;
-
-const userSchema = new moongose.Schema({
-
+const userSchema = new mongoose.Schema(
+  {
     username: {
-        type:String
+      type: String,
     },
     email: {
-        type: String,
-        required: [true , "email required"]
+      type: String,
+      required: [true, "email required"],
+      unique: true,
     },
     password: {
-        type: String,
-        required: [true , "password required"]
-    }
+      type: String,
+      required: [true, "password required"],
+    },
+    email_verifiy_token: { type: String },
+    email_verifiy_token_exp: { type: Date },
+  },
+  {
+    timestamps: true,
+  }
+);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 
-})
+export default User;
