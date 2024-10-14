@@ -44,7 +44,15 @@ export const POST = async (req) => {
         { status: 404 }
       );
     }
-    
+
+    const userdata = {
+      username: user.username,
+      email: user.email,
+      createdat: user.createdAt,
+      isuserverified: user.isuserverified,
+      id: user._id,
+    };
+
     const response = NextResponse.json(
       {
         success: true,
@@ -52,6 +60,7 @@ export const POST = async (req) => {
       },
       { status: 200 }
     );
+    response.cookies.set("mechat_token", mechat_token, { httpOnly: true });
 
     return response;
   } catch (err) {
