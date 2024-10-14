@@ -11,7 +11,7 @@ const validatePassword = (password) => {
   return passwordRegex.test(password);
 };
 export const POST = async (req) => {
-  connect();
+ await connect();
   try {
     const reqbody = await req.json();
     const { username, email, password } = reqbody;

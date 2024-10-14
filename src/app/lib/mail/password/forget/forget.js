@@ -1,35 +1,21 @@
 import nodemailer from "nodemailer";
 import User from "../../modals/user_modal";
-import jwt from "jsonwebtoken";
-import { DateTime } from "luxon";
 
 import { NextResponse } from "next/server";
 
 const admin = process.env.ADMIN;
 const pass = process.env.PASS;
-const secret = process.env.JWT_SECRET;
-const DOMAIN = process.env.DOMAIN;
 
-export const sendVerificationEmail = async (email) => {
+export const resetpasswordOTP = async (email, otp) => {
   try {
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const tokentExpiry = DateTime.now()
-      .setZone(userTimezone)
-      .plus({ hours: 2 });
-
-    const emailVerificationToken = jwt.sign(email, secret);
-
     const updateFields = {
-      email_verifiy_token: emailVerificationToken,
-      email_verifiy_token_exp: tokentExpiry.toJSDate(),
+      forget_password_otp: otp,
     };
 
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
     }
-
-    const name = await user.username;
 
     Object.assign(user, updateFields);
     await user.save();
@@ -45,7 +31,7 @@ export const sendVerificationEmail = async (email) => {
     const mailOption = {
       from: admin,
       to: email,
-      subject: "Verify email for ME _ CHAT",
+      subject: "Forget password for ME _ CHAT Account",
       html: `
         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; padding: 20px;">
         <tr>
@@ -62,15 +48,7 @@ export const sendVerificationEmail = async (email) => {
                     <!-- Content -->
                     <tr>
                         <td style="padding: 30px;">
-                            <h2 style="font-size: 24px; margin-top: 0; color: #4338ca; font-weight: bold;">Hello ${name},</h2>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 0 0 20px;">Thank you for signing up for MY CHAT! To complete your registration and activate your account, please verify your email address by clicking the button below.</p>
-                            <a href="${DOMAIN}/verifyemail?token=${emailVerificationToken}" style="display: inline-block; padding: 12px 25px; font-size: 16px; color: #ffffff; background-color: #4338ca; text-decoration: none; border-radius: 5px; margin-top: 10px; font-weight: bold;">Verify Email</a>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 20px 0;">Or copy and paste this link into your browser:</p>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 0; word-break: break-word;">${DOMAIN}/verifyemail?token=${emailVerificationToken}</p>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 20px 0;">If you did not create an account with MY CHAT, please ignore this email.</p>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 0;">If you have any questions or need further assistance, feel free to contact our support team.</p>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 20px 0 0;">Thank you for joining us!</p>
-                            <p style="font-size: 16px; line-height: 1.6; margin: 0;">Best regards,<br>The MY CHAT Team</p>
+                         <p>we are recieved request for forget password <br />  if you create request to update / forget your password <br /> <h1>${otp}</h1> </p>
                         </td>
                     </tr>
                     

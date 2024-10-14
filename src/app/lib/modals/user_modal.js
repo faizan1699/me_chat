@@ -14,9 +14,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "password required"],
     },
-    isuserverified: {type: Boolean, default: false},
+    isuserverified: { type: Boolean, default: false },
     email_verifiy_token: { type: String },
     email_verifiy_token_exp: { type: Date },
+    forget_password_otp: { type: String },
   },
   {
     timestamps: true,
