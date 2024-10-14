@@ -45,6 +45,13 @@ export const POST = async (req) => {
       );
     }
 
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return NextResponse.json(
+        { message: "Invalid password" },
+        { status: 402 }
+      );
+    }
     const userdata = {
       username: user.username,
       email: user.email,
@@ -55,12 +62,12 @@ export const POST = async (req) => {
     const mechat_token = jwt.sign(userdata, secret, {
       expiresIn: "6d",
     });
-    
+
     const response = NextResponse.json(
       {
         success: true,
         message:
-          "Account Created Successfully and account email verification sent",
+          "login successfully",
       },
       { status: 200 }
     );
@@ -69,6 +76,6 @@ export const POST = async (req) => {
     return response;
   } catch (err) {
     return NextResponse.json({ message: err?.message }, { status: 500 });
-    console.log("error on register", err?.message);
+    console.log("error on login", err?.message);
   }
 };

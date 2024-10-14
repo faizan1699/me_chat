@@ -56,16 +56,18 @@ export const POST = async (req) => {
     const newuser = new User({
       username,
       email,
+      isuserverified: false,
       password: hashedpassword,
     });
 
     await newuser.save();
     await sendVerificationEmail(email);
-    
+
     const response = NextResponse.json(
       {
         success: true,
-        message: "Account Created Successfully",
+        message:
+          "Account Created Successfully and account email verification sent",
       },
       { status: 200 }
     );
