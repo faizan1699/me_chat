@@ -21,7 +21,7 @@ export const sendVerificationEmail = async (email) => {
 
     const updateFields = {
       email_verifiy_token: emailVerificationToken,
-      email_verifiy_token_exo: tokentExpiry.toJSDate(),
+      email_verifiy_token_exp: tokentExpiry.toJSDate(),
     };
 
     const user = await User.findOne({ email });
