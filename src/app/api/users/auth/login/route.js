@@ -52,11 +52,15 @@ export const POST = async (req) => {
       isuserverified: user.isuserverified,
       id: user._id,
     };
-
+    const mechat_token = jwt.sign(userdata, secret, {
+      expiresIn: "6d",
+    });
+    
     const response = NextResponse.json(
       {
         success: true,
-        message: "Account Created Successfully",
+        message:
+          "Account Created Successfully and account email verification sent",
       },
       { status: 200 }
     );
