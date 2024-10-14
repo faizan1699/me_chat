@@ -1,6 +1,7 @@
 import User from "@/app/lib/modals/user_modal";
 import bcrypt from "bcryptjs";
 
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { connect } from "@/app/lib/db/db";
 
@@ -9,6 +10,9 @@ const validatePassword = (password) => {
     /^(?=.*[0-9])(?=.*[!@#$%^&*()_\-+=\[\]{};:'",.\/\\|`~])[a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'",.\/\\|`~]{8,}$/;
   return passwordRegex.test(password);
 };
+
+const secret = process.env.JWT_SECRET;
+
 export const POST = async (req) => {
   connect();
   try {
@@ -45,6 +49,13 @@ export const POST = async (req) => {
       );
     }
 
+    const isverified = user.isuserverified;
+    if (!isverified) {
+      return NextResponse.json(
+        { message: "pls verify your email first" },
+        { status: 310 }
+      );
+    }
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       return NextResponse.json(
@@ -66,8 +77,7 @@ export const POST = async (req) => {
     const response = NextResponse.json(
       {
         success: true,
-        message:
-          "login successfully",
+        message: "login successfully",
       },
       { status: 200 }
     );
