@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../../components/headers/navbar';
+import Navbar from '@/app/components/headers/navbar';
 
 const Main = ({ children }) => {
     return (
