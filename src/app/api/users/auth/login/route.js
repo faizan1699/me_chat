@@ -63,6 +63,7 @@ export const POST = async (req) => {
         { status: 402 }
       );
     }
+    
     const userdata = {
       username: user.username,
       email: user.email,

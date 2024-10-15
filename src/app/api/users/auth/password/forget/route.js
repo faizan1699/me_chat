@@ -14,12 +14,12 @@ export const POST = async (req) => {
 
   try {
     const reqbody = await req.json();
-    const { email } = reqbody;
+    const { email, otp, newpassword } = reqbody;
 
-    if (!email) {
+    if (!otp) {
       return NextResponse.json(
         {
-          message: "email required",
+          message: "otp required",
         },
         { status: 400 }
       );
@@ -31,10 +31,19 @@ export const POST = async (req) => {
       return NextResponse.json({ message: "user not found" }, { status: 400 });
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(newpassword, salt);
+
+    user.otp = undefined;
+    user.forget_password_otp = undefined;
+    user.password = hashedpassword;
+
+    await user.save();
+
     return NextResponse.json(
       {
         success: true,
-        message: "pls check your email for get OTP",
+        message: "password changed successfully",
       },
       { status: 200 }
     );

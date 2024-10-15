@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Main = ({ children }) => {
+const ForgetPassword = () => {
     return (
         <div>
-            {children}
+
         </div>
     )
 }
 
-export default Main
+export default ForgetPassword

@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#body {
+  height: 100vh !important;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 640px) {
+  .mb_nav_list {
+    margin-top: 15px !important;
+  }
+}
