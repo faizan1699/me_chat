@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { showAlert } from '@/app/components/alert/alert';
 import axios from 'axios';
+import { ResendUserVerificationEmail } from '@/app/services/api/auth/resend_email/resendemail';
+
 
 const Login = () => {
 
     const [loading, setLoading] = useState(false);
+    const [emailloading, setEmailLoading] = useState(false);
     const [inputs, setInputs] = useState({
         email: "",
         password: ""
@@ -34,7 +37,11 @@ const Login = () => {
         }
         catch (error) {
             console.log(error)
-            showAlert('error', 'Error', error?.response?.data?.message, 4000);
+            if (error.response.status == 310) {
+                showAlert('info', 'Unverified', error?.response?.data?.message, 4000);
+            } else {
+                showAlert('error', 'Error', error?.response?.data?.message, 4000);
+            }
         }
         finally {
             setLoading(false);
@@ -43,6 +50,21 @@ const Login = () => {
 
     const forget_password = () => {
         router.push("forgetpassword");
+    }
+
+    const handleResendEmail = async () => {
+
+        const { email } = inputs;
+        setEmailLoading(true);
+        
+        try {
+            const response = await axios.post("/api/users/email/resend_verifiy_user", email);
+            showAlert("success", "Mail sent", response?.data?.message);
+        } catch (error) {
+            showAlert("error", "Mail not send", error?.response?.data?.message);
+        } finally {
+            setEmailLoading(false);
+        }
     }
 
     return (
@@ -61,7 +83,7 @@ const Login = () => {
                             placeholder="Enter your email : "
                             className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600"
                             autoComplete='email'
-                       />
+                        />
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-gray-800 font-bold">Password:</label>
@@ -82,6 +104,12 @@ const Login = () => {
                         Continue {loading ? "...." : ""}
                     </button>
                 </form>
+                <div onClick={handleResendEmail}>
+                    <button type="submit" className="cursor-pointer py-2 px-4 block mt-6 bg-indigo-700 text-white font-bold w-full text-center rounded">
+                        Resend Email Verification {emailloading ? "...." : ""}
+                    </button>
+                </div>
+
                 <span className="flex justify-center">
                     <Link href="/register" className="text-center font-black text-sm font-thin text-gray-800 hover:underline mt-4 inline-block hover:text-indigo-600">Not have account ? create one</Link>
                 </span>
