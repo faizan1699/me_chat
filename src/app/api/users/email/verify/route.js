@@ -19,7 +19,10 @@ export const POST = async (req) => {
     const user = await User.findOne({ email_verifiy_token: token });
 
     if (!user) {
-      return NextResponse.json({ message: "Invalid Token" }, { status: 400 });
+      return NextResponse.json(
+        { message: "Invalid Token or expired token" },
+        { status: 400 }
+      );
     }
 
     try {

@@ -1,7 +1,5 @@
-import Image from "next/image";
+import Home from "./pages/home/page";
 
-export default function Home() {
-  return (
-    <div>this is my home page</div>
-  );
+export default function Index() {
+  return <Home />;
 }

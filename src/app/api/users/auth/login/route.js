@@ -53,7 +53,7 @@ export const POST = async (req) => {
     if (!isverified) {
       return NextResponse.json(
         { message: "pls verify your email first" },
-        { status: 310 }
+        { status: 401 }
       );
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password);

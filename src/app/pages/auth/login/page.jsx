@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { showAlert } from '@/app/components/alert/alert';
 import axios from 'axios';
-import { ResendUserVerificationEmail } from '@/app/services/api/auth/resend_email/resendemail';
-
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
 
+    const router = useRouter();
+
+    const [isverified, setIsVerfied] = useState(false);
     const [loading, setLoading] = useState(false);
     const [emailloading, setEmailLoading] = useState(false);
     const [inputs, setInputs] = useState({
@@ -33,11 +35,13 @@ const Login = () => {
         try {
             const response = await axios.post("/api/users/auth/login", inputs);
             showAlert('success', 'Account Created', response?.data?.message, 4000);
-            // router.push("/");
+            router.push("/");
+            localStorage.setItem("islogedin", JSON.stringify(true));
         }
         catch (error) {
             console.log(error)
-            if (error.response.status == 310) {
+            if (error?.response?.status == 401) {
+                setIsVerfied(true);
                 showAlert('info', 'Unverified', error?.response?.data?.message, 4000);
             } else {
                 showAlert('error', 'Error', error?.response?.data?.message, 4000);
@@ -56,14 +60,15 @@ const Login = () => {
 
         const { email } = inputs;
         setEmailLoading(true);
-        
+
         try {
-            const response = await axios.post("/api/users/email/resend_verifiy_user", email);
+            const response = await axios.post("/api/users/email/resend_verify_user", { email });
             showAlert("success", "Mail sent", response?.data?.message);
         } catch (error) {
             showAlert("error", "Mail not send", error?.response?.data?.message);
         } finally {
             setEmailLoading(false);
+            setIsVerfied(false);
         }
     }
 
@@ -104,11 +109,11 @@ const Login = () => {
                         Continue {loading ? "...." : ""}
                     </button>
                 </form>
-                <div onClick={handleResendEmail}>
+                {isverified && <div onClick={handleResendEmail}>
                     <button type="submit" className="cursor-pointer py-2 px-4 block mt-6 bg-indigo-700 text-white font-bold w-full text-center rounded">
                         Resend Email Verification {emailloading ? "...." : ""}
                     </button>
-                </div>
+                </div>}
 
                 <span className="flex justify-center">
                     <Link href="/register" className="text-center font-black text-sm font-thin text-gray-800 hover:underline mt-4 inline-block hover:text-indigo-600">Not have account ? create one</Link>
