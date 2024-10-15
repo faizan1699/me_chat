@@ -21,7 +21,7 @@ const Navbar = () => {
     const [mbmenu, setMbmenu] = useState(false);
 
     const islogedin = JSON.parse(localStorage.getItem("islogedin"));
-    console.log(islogedin)
+
     return (
 
         <nav className="bg-gray-800 ">
