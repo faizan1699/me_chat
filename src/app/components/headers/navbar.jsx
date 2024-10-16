@@ -1,11 +1,12 @@
 "use client";
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import logo from "@/app/assets/logo/logo.png"
 import Image from 'next/image';
 import { ListItems } from '../listitems/list';
+import { islogincontext } from '@/app/layouts/common/commonlayout';
 
 const navigation = [
     { name: "Home", href: "/home", },
@@ -17,10 +18,10 @@ const navigation = [
 
 const Navbar = () => {
 
+    const islogin = useContext(islogincontext);
+
     const [openmenu, seTopenMenu] = useState(false);
     const [mbmenu, setMbmenu] = useState(false);
-
-    const islogedin = JSON.parse(localStorage.getItem("islogedin"));
 
     return (
 
@@ -69,7 +70,7 @@ const Navbar = () => {
                             </svg>
                         </button>
 
-                        {islogedin === true &&
+                        {islogin === true &&
                             (<div className="relative ml-3">
                                 <div onClick={() => seTopenMenu(!openmenu)}>
                                     <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">

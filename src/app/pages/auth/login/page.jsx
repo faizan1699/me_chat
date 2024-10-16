@@ -1,14 +1,18 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import { showAlert } from '@/app/components/alert/alert';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+import { islogincontext } from '@/app/layouts/common/commonlayout';
+
 const Login = () => {
 
     const router = useRouter();
+
+    const { setIsLogin } = useContext(islogincontext);
 
     const [isverified, setIsVerfied] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -34,9 +38,10 @@ const Login = () => {
         setLoading(true);
         try {
             const response = await axios.post("/api/users/auth/login", inputs);
+            setIsLogin(true);
             showAlert('success', 'Account Created', response?.data?.message, 4000);
-            router.push("/");
             localStorage.setItem("islogedin", JSON.stringify(true));
+            router.push("/");
         }
         catch (error) {
             console.log(error)
