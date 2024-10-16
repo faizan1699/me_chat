@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
 export function middleware(request) {
-  const token = request.cookies.get("mechat_token")?.value || null;
+  const x = request.cookies.get("mechat_token");
+  const token = x && typeof x === "object" ? x.value : x;
   const reqpath = request.nextUrl.pathname;
 
   console.log("middleware", reqpath);
