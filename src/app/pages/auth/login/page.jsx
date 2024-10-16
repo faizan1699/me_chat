@@ -6,7 +6,7 @@ import { showAlert } from '@/app/components/alert/alert';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-import { islogincontext } from '@/app/layouts/common/commonlayout';
+import { islogincontext } from '@/app/components/layouts/common/commonlayout';
 
 const Login = () => {
 

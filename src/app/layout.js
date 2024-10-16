@@ -1,7 +1,6 @@
 import "./globals.css";
 
-import Main from "./layouts/main/main";
-import CommonLayout from "./layouts/common/commonlayout";
+import CommonLayout from "./components/layouts/common/commonlayout";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
   return (
     <html lang="en">
       <body>
