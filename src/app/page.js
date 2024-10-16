@@ -1,5 +1,5 @@
-import Home from "./pages/home/page";
+import Chat from "./pages/chat/page";
 
 export default function Index() {
-  return <Home />;
+  return <Chat />;
 }

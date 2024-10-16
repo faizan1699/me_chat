@@ -7,6 +7,7 @@ import logo from "@/app/assets/logo/logo.png"
 import Image from 'next/image';
 import { ListItems } from '../listitems/list';
 import { islogincontext } from '../layouts/common/commonlayout';
+import { useRouter } from 'next/navigation';
 
 const navigation = [
     { name: "Home", href: "/home", },
@@ -18,6 +19,7 @@ const navigation = [
 
 const Navbar = () => {
 
+    const router = useRouter();
     const [openmenu, seTopenMenu] = useState(false);
     const [mbmenu, setMbmenu] = useState(false);
 
@@ -43,16 +45,16 @@ const Navbar = () => {
                     </div>
 
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <Link href="/">
-                            <div className="flex flex-shrink-0 items-center">
-                                <Image
-                                    src={logo}
-                                    width={40}
-                                    height={40}
-                                    alt="logo"
-                                />
-                            </div>
-                        </Link>
+
+                        <div onClick={() => router.back()} className="flex flex-shrink-0 items-center">
+                            <Image
+                                src={logo}
+                                width={40}
+                                height={40}
+                                alt="logo"
+                            />
+                        </div>
+
                         <div className="mt-2 w-full  hidden sm:ml-6 sm:block ">
                             <div className="flex gap-8 justify-center items-center">
                                 <ListItems navigation={navigation} />
@@ -80,7 +82,7 @@ const Navbar = () => {
 
                             {openmenu &&
                                 <div onClick={() => seTopenMenu(!openmenu)} className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</Link>
+                                    <Link href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</Link>
                                 </div>}
                         </div>
 

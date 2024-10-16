@@ -6,19 +6,12 @@ import { islogincontext } from '../common/commonlayout';
 
 const Main = ({ children }) => {
 
-    const none = undefined || null || false;
     const { islogin } = useContext(islogincontext);
 
     return (
 
         <div id="body">
-
-            {islogin == none && (
-                <div className='main_pages_body'>
-                    <Navbar />
-                </div>
-            )}
-
+            {(islogin === undefined || islogin === null || islogin === false) && <Navbar />}
             {children}
         </div >
     )

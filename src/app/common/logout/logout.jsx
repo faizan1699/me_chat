@@ -7,7 +7,6 @@ import { islogincontext } from '@/app/components/layouts/common/commonlayout';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-
 const Logout = () => {
 
     const router = useRouter();
@@ -19,7 +18,7 @@ const Logout = () => {
             const res = await axios.post("/api/users/auth/logout");
             localStorage.removeItem("islogedin");
             router.push("/login");
-            setIsLogin(!islogin);
+            setIsLogin(false);
             showAlert("success", "Logout", res?.data?.message, 5000);
         }
         catch (error) {
