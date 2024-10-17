@@ -45,15 +45,16 @@ const ChatNav = () => {
               <span className="sr-only">Open user menu</span>
               <Image
                 width={50}
+                height={50}
                 className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
+                src=""
+                alt="img"
               />
             </div>
 
             {openmenu && (
               <div className="absolute mb-4 bottom-full z-10 w-48 rounded-md bg-white py-1 px-2 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                <Link href="/me" onClick={handleToggleMenu} className="block px-4 py-2 text-sm text-gray-700">Your Profile</Link>
+                <Link href="/profile" onClick={handleToggleMenu} className="block px-4 py-2 text-sm text-gray-700">Your Profile</Link>
                 <Logout />
               </div>
             )}
