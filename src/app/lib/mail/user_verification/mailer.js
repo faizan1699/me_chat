@@ -55,7 +55,7 @@ export const sendVerificationEmail = async (email) => {
                     <!-- Header -->
                     <tr>
                         <td align="center" style="background-color: #4338ca; color: #ffffff; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 20px;">
-                            <img src=${process.env.logo} alt="My Chat Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                            <I src=${process.env.logo} alt="My Chat Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
                         </td>
                     </tr>
                     
