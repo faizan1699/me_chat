@@ -38,10 +38,10 @@ const Login = () => {
         setLoading(true);
         try {
             const response = await axios.post("/api/users/auth/login", inputs);
-            setIsLogin(true);
             localStorage.setItem("islogedin", JSON.stringify(true));
             showAlert('success', 'Account Created', response?.data?.message, 4000);
 
+            setIsLogin(true);
             router.push("/chat");
         }
         catch (error) {

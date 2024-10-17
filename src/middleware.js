@@ -12,7 +12,7 @@ export function middleware(request) {
     reqpath === "/about" ||
     reqpath === "/contact" ||
     reqpath === "/privacy-policy" ||
-    reqpath === "/signup" ||
+    reqpath === "/register" ||
     reqpath === "/forget_password";
 
   // Check if the user is trying to access a public path while logged in
@@ -24,7 +24,7 @@ export function middleware(request) {
   }
 
   // Protected paths that require a valid token
-  const isProtectedPath = ["/", "/chat", "/profile"];
+  const isProtectedPath = ["/", "/chat", "/me"];
 
   // Redirect to login if trying to access protected paths without a token
   if (isProtectedPath.some((path) => reqpath.startsWith(path)) && !token) {
@@ -51,7 +51,7 @@ export const config = {
     "/contact",
     "/chat",
     "/privacy-policy",
-    "/profile",
+    "/me",
     "/register",
     "/login",
     "/forget_password/:path*",

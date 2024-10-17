@@ -17,11 +17,11 @@ export const ListItems = ({ navigation }) => {
 
     return (
         <>
-            {navigation && navigation.map((item) => {
+            {navigation && navigation.map((item, i) => {
                 const isSelected = item.name === selectedLink;
                 return (
                     <Link
-                        key={item.name}
+                        key={i}
                         href={item.href}
                         className={`relative text-sm leading-6 no-underline mb_nav_list ${isSelected ? "font-semibold text-white" : "text-gray-500"
                             }`}

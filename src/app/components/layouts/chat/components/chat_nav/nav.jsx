@@ -52,7 +52,7 @@ const ChatNav = () => {
 
             {openmenu && (
               <div className="absolute mb-4 bottom-full z-10 w-48 rounded-md bg-white py-1 px-2 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                <p onClick={handleToggleMenu} className="block px-4 py-2 text-sm text-gray-700">Your Profile</p>
+                <Link href="/me" onClick={handleToggleMenu} className="block px-4 py-2 text-sm text-gray-700">Your Profile</Link>
                 <Logout />
               </div>
             )}
