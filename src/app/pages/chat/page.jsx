@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import ChatLayout from '@/app/components/layouts/chat/layout/chatlayout'; 
 
