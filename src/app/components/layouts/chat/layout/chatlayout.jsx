@@ -19,7 +19,7 @@ const ChatLayout = () => {
             <div className='flex'>
                 <div className='d-none-mb'><ChatNav /></div>
                 <Chats />
-                <div className=''><Messages /></div>
+                <Messages />
             </div>
 
         </chatTypeContext.Provider>

@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-#body {
+#app_body {
   height: 100vh !important;
   overflow: hidden;
+}
+
+.messages_screen {
+  height: 63%;
+  overflow-y: scroll;
 }
 
 @media screen and (min-width: 641px) {

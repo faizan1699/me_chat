@@ -28,10 +28,11 @@ const CommonLayout = ({ children }) => {
     return (
         <islogincontext.Provider value={{ islogin, setIsLogin }}>
 
-            {!islogin && <Navbar />}
+            <div id='app_body'>
+                {!islogin && <Navbar />}
+                <div>{children}</div>
+            </div>
 
-            <div>{children}</div>
-            
         </islogincontext.Provider>
     );
 }
