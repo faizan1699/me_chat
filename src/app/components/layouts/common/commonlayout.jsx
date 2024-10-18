@@ -6,29 +6,33 @@ import Navbar from '../../headers/navbar';
 export const islogincontext = createContext();
 
 const CommonLayout = ({ children }) => {
-
     const [islogin, setIsLogin] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        try {
-            const isLogged = JSON.parse(localStorage.getItem("islogedin"));
-            setIsLogin(isLogged);
-        } catch (error) {
-            console.error("Failed to parse login status:", error);
-            setIsLogin(false);
-        }
-
+        const isLogged = JSON.parse(localStorage.getItem("islogedin"));
+        setIsLogin(isLogged);
+        setLoading(false);
     }, []);
 
+    useEffect(() => {
+        const isLogged = JSON.parse(localStorage.getItem("islogedin"));
+        setIsLogin(isLogged);
+        setLoading(false);
+    }, [islogin]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div>
-            <islogincontext.Provider value={{ islogin, setIsLogin }}>
+        <islogincontext.Provider value={{ islogin, setIsLogin }}>
 
-                {(islogin === false || islogin === null || islogin === undefined) && <Navbar />}
-                <div>{children}</div>
+            {!islogin && <Navbar />}
 
-            </islogincontext.Provider>
-        </div >
+            <div>{children}</div>
+            
+        </islogincontext.Provider>
     );
 }
 

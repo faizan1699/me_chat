@@ -25,7 +25,7 @@ const ChatNav = () => {
 
   return (
 
-    <aside className="flex ">
+    <aside className="flex">
 
       <div className="flex justify-between flex-col items-center w-14 h-screen py-8 space-y-8 bg-gray-50 border-r-2">
 
@@ -74,7 +74,6 @@ const ChatNav = () => {
             </div>
           )}
         </div>
-
 
       </div>
 

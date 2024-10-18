@@ -10,7 +10,7 @@ const Chats = () => {
     const { chattype, setChatType } = useContext(chatTypeContext);
 
     return (
-        <div className='px-2 border-r-2'>
+        <div className='w-full max-w-[360px] px-2 border-r-2 h-screen'>
             <ChatHead />
             {chattype === 1 && <MyChats />}
             {chattype === 2 && <GroupChat />}

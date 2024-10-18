@@ -17,9 +17,9 @@ const ChatLayout = () => {
         <chatTypeContext.Provider value={{ chattype, setChatType }}>
 
             <div className='flex'>
-                <ChatNav />
+                <div className='d-none-mb'><ChatNav /></div>
                 <Chats />
-                <Messages />
+                <div className=''><Messages /></div>
             </div>
 
         </chatTypeContext.Provider>

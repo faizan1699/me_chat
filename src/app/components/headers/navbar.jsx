@@ -19,13 +19,23 @@ const navigation = [
 
 const Navbar = () => {
 
+    // const { islogin } = useContext(islogincontext);
     const router = useRouter();
     const [openmenu, seTopenMenu] = useState(false);
     const [mbmenu, setMbmenu] = useState(false);
 
+    const handleLogoClick = () => {
+        if (document.referrer && document.referrer.includes(window.location.origin)) {
+            router.back();
+        } else {
+            router.push('/');
+        }
+    };
+
+
     return (
 
-        <nav className="bg-gray-800 ">
+        <nav className={`bg-gray-800`}>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-14 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -46,7 +56,7 @@ const Navbar = () => {
 
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 
-                        <div onClick={() => router.back()} className="flex flex-shrink-0 items-center">
+                        <div onClick={handleLogoClick} className="flex flex-shrink-0 items-center">
                             <Image
                                 src={logo}
                                 width={40}
@@ -71,7 +81,7 @@ const Navbar = () => {
                         </button>
 
 
-                        <div className="relative ml-3">
+                        {/* <div className="relative ml-3">
                             <div onClick={() => seTopenMenu(!openmenu)}>
                                 <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                     <span className="absolute -inset-1.5"></span>
@@ -84,7 +94,7 @@ const Navbar = () => {
                                 <div onClick={() => seTopenMenu(!openmenu)} className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
                                     <Link href="/" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</Link>
                                 </div>}
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
