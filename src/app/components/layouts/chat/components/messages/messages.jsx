@@ -6,11 +6,11 @@ import MessagesInput from './inputs/messages_input'
 const Messages = () => {
     return (
 
-        <div className='flex flex-col justify-between w-full h-screen pb-4'>
+        <div className='flex flex-col justify-between w-full h-screen '>
          
             <MessageNav />
 
-            <div className="flex flex-col overflow-hidden">
+            <div className="flex flex-col overflow-hidden w-full">
 
                 <div className="overflow-y-auto rounded-lg">
                     <UserMessages />

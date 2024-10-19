@@ -14,7 +14,7 @@ const MessageNav = () => {
     return (
 
         <nav className={`bg-gray-100 min-w-[360px] `}>
-            <div className="mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="mx-auto px-2 sm:px-3 lg:px-8">
                 <div className="relative flex h-14 items-center justify-between">
 
 

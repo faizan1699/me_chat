@@ -17,6 +17,8 @@
     "bcryptjs": "^2.4.3",
     "cookie": "^1.0.1",
     "framer-motion": "^11.11.8",
+    "js-cookie": "^3.0.5",
+    "js-cookies": "^1.0.4",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.5.0",
     "mongoose": "^8.7.1",
