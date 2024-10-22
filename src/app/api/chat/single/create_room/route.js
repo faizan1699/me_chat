@@ -9,7 +9,6 @@ export const POST = async (req) => {
     const tokenData = JWT_TOKEN(req); // Call the JWT_TOKEN function
     console.log("User token data:", tokenData);
 
-    // Check if the necessary data was retrieved
     if (!tokenData.email) {
       return NextResponse.json(
         {
@@ -32,7 +31,7 @@ export const POST = async (req) => {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error:", error); // Log the error for debugging
+    console.error("Error:", error); 
 
     return NextResponse.json(
       {

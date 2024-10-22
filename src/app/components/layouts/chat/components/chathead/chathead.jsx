@@ -1,16 +1,24 @@
-import React, { useContext } from 'react'
+
+import React, { Children, useContext } from 'react'
+
 import { chatTypeContext } from '../../layout/chatlayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { faMagento } from '@fortawesome/free-brands-svg-icons';
+import { isModalContext } from '../../../common/commonlayout';
+
+import FindUser from './modal_page/finduserinput';
+import Modal from '@/app/common/modal/modal';
 import MbNav from '../chat_nav/mbnav';
 
 const ChatHead = () => {
 
     const { chattype } = useContext(chatTypeContext);
+    const { isOpen, setIsOpen } = useContext(isModalContext);
+
 
     const handleAddChat = () => {
-        console.log("add");
+        setIsOpen(true);
     }
     const handleCreateGroup = () => {
         console.log("addد");
@@ -18,6 +26,7 @@ const ChatHead = () => {
 
     return (
         <>
+            <Modal title="Search your chats users " ><FindUser /></Modal>
             <div className='py-3'>
                 <span className='flex justify-between text-2xl font-bold'>{chattype === 1 ? "Chats" : "Groups"}
                     <span>

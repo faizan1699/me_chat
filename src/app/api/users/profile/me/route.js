@@ -33,10 +33,11 @@ export const GET = async (req) => {
     return NextResponse.json(
       {
         message: "data fetch",
-        token: decoded,
+        me: decoded,
       },
       { status: 200 }
     );
+
   } catch (error) {
     console.log("error for jwt", error?.message);
     return NextResponse.json(
