@@ -2,32 +2,35 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import { isMeContext } from '@/app/components/layouts/common/commonlayout';
+import { showAlert } from '@/app/components/alert/alert';
+import { useRouter } from 'next/navigation';
 
 import Prevpage from '@/app/common/prevpage/prevpage'
 import dummy from "../../../assets/imgs/dummy.png";
 import Image from 'next/image';
+import axios from 'axios';
 
 const inputclass = "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5";
 
 const EditProfile = () => {
 
+    const router = useRouter();
     const { me } = useContext(isMeContext);
 
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState({
         username: me?.username || "",
-        email: me?.email || "",
+        newemail: me?.email || "",
         bio: me?.bio || "",
-    })
+    });
 
     useEffect(() => {
         if (me) {
             setInput({
-                ...input,
-                username: me.username,
-                avatar: me.avatar,
-                email: me.email,
-                bio: me.bio,
+                username: me?.username || "",
+                avatar: me?.avatar || "",
+                email: me?.email || "",
+                bio: me?.bio || "",
             })
         }
 
@@ -42,8 +45,22 @@ const EditProfile = () => {
         })
 
     }
-    const handleUpdateProfile = (e) => {
+    const handleUpdateProfile = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        console.log("aaa")
+        try {
+
+            const api = await axios.post("/api/users/profile/update", input);
+            showAlert("success", "profile updated", api?.data?.message, 8000);
+            localStorage.setItem("islogedin", JSON.stringify(false));
+            router.push("/login");
+        } catch (error) {
+            showAlert("error", "something went wrong", error?.response?.data?.message, 5000);
+        } finally {
+            setLoading(false);
+        }
+
     }
 
     return (
@@ -85,7 +102,7 @@ const EditProfile = () => {
                                     <input
                                         type="text"
                                         name="username"
-                                        value={input.username}
+                                        value={input.username || ""}
                                         className={inputclass}
                                         onChange={handleInputchange}
                                         placeholder="Your first name"
@@ -98,7 +115,7 @@ const EditProfile = () => {
                                     <input
                                         type="email"
                                         name="email"
-                                        value={input.email}
+                                        value={input.email || ""}
                                         className={inputclass}
                                         onChange={handleInputchange}
                                         placeholder="me@mail.com"
@@ -111,21 +128,21 @@ const EditProfile = () => {
                                     <input
                                         type="text"
                                         name="bio"
-                                        value={input.bio}
+                                        value={input.bio || ""}
                                         className={inputclass}
                                         onChange={handleInputchange}
                                         placeholder="i am ...."
                                     />
                                 </div>
 
-                            </form>
 
-                            <div className="w-full mt-4">
-                                <button type="submit"
-                                    className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
-                                    Update profile  {loading ? "...." : ""}
-                                </button>
-                            </div>
+                                <div className="w-full mt-4">
+                                    <button type="submit"
+                                        className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+                                        Update profile  {loading ? "...." : ""}
+                                    </button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
