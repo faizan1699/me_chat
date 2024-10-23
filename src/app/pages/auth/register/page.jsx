@@ -91,8 +91,8 @@ const Register = () => {
                 <span className="flex justify-center">
                     <Link href="/login" className="text-center font-black text-sm font-thin text-gray-800 hover:underline mt-4 inline-block hover:text-indigo-600">Use existing account</Link>
                 </span>
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 }

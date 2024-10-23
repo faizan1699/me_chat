@@ -37,7 +37,6 @@ export const GET = async (req) => {
       },
       { status: 200 }
     );
-
   } catch (error) {
     console.log("error for jwt", error?.message);
     return NextResponse.json(

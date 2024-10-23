@@ -30,7 +30,6 @@ const CommonLayout = ({ children }) => {
     const getUserdata = async () => {
         try {
             const api = await axios.get("/api/users/profile/me");
-            console.log("from common", api?.data?.me);
             setMe(api?.data?.me);
         } catch (error) {
             console.log(error?.response?.data?.message);
