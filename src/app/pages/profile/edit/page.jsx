@@ -20,7 +20,7 @@ const EditProfile = () => {
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState({
         username: me?.username || "",
-        newemail: me?.email || "",
+        email: me?.email || "",
         bio: me?.bio || "",
     });
 
@@ -53,8 +53,8 @@ const EditProfile = () => {
 
             const api = await axios.post("/api/users/profile/update", input);
             showAlert("success", "profile updated", api?.data?.message, 8000);
-            localStorage.setItem("islogedin", JSON.stringify(false));
-            router.push("/login");
+            // localStorage.setItem("islogedin", JSON.stringify(false));
+            // router.push("/login");
         } catch (error) {
             showAlert("error", "something went wrong", error?.response?.data?.message, 5000);
         } finally {
@@ -124,7 +124,7 @@ const EditProfile = () => {
                                 <div className="w-fu">
                                     <label htmlFor="bio"
                                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
-                                        username : </label>
+                                        bio : </label>
                                     <input
                                         type="text"
                                         name="bio"
@@ -134,7 +134,6 @@ const EditProfile = () => {
                                         placeholder="i am ...."
                                     />
                                 </div>
-
 
                                 <div className="w-full mt-4">
                                     <button type="submit"

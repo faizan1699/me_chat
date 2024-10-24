@@ -63,13 +63,14 @@ export const POST = async (req) => {
         { status: 402 }
       );
     }
-    
+
     const userdata = {
       username: user.username,
       email: user.email,
       createdat: user.createdAt,
       isuserverified: user.isuserverified,
       id: user._id,
+      bio: user.bio,
     };
     const mechat_token = jwt.sign(userdata, secret, {
       expiresIn: "6d",
